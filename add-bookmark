@@ -1,0 +1,20 @@
+#!/bin/bash
+
+bookmark="$(xclip -o)"
+file="$HOME/Documents/MyPrograms/Scripts/dmenu-bookmark/.cache/bookmarks"
+
+if grep -q "^$bookmark$" "$file"; 
+then
+  notify-send "Bookmark already exists"
+else
+  response=$(echo "" | dmenu -p "Do you want to add \"$bookmark\" to bookmarks? [Y/n]: ")
+
+  if [[ "$response" = "n" ]]
+  then
+    notify-send "Operation cancelled" "bookmark not added"
+    exit
+  fi
+
+  echo "$bookmark" >> "$file"
+  notify-send "Bookmark Added!" "$bookmark is saved to bookmarks"
+fi
