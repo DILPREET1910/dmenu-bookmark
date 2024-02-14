@@ -7,7 +7,7 @@ if grep -q "^$bookmark$" "$file";
 then
   notify-send "Bookmark already exists"
 else
-  response=$(echo "" | dmenu -p "Do you want to add \"$bookmark\" to bookmarks? [Y/n]: ")
+  response=$(echo "" | dmenu -c -p "Do you want to add \"$bookmark\" to bookmarks? [Y/n]: ")
 
   if [[ "$response" = "n" ]]
   then
